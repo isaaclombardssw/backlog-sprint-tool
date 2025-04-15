@@ -114,23 +114,35 @@ export default function Home() {
 
       await navigator.clipboard.writeText(content);
     } else {
-      // Create RTF table
-      const rtfHeader = `{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1033{\\fonttbl{\\f0\\fnil\\fcharset0 Calibri;}}\n{\\colortbl;\\red0\\green0\\blue0;\\red255\\green255\\blue255;}\n\\viewkind4\\uc1\\pard\\f0\\fs22\\par\n`;
+      // Create HTML table
+      const htmlTable = `
+        <table style="border-collapse: collapse; width: 100%; font-family: Calibri, Arial, sans-serif;">
+          <thead>
+            <tr style="background-color: #f5f5f5;">
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Metric</th>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">New PBIs</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">${stats.newPBIs.count}</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">PBIs with YakShaver Label</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">${stats.yakShaverPBIs.count}</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">Completed PBIs</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">${stats.completedPBIs.count}</td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+
+      const blob = new Blob([htmlTable], { type: 'text/html' });
+      const data = [new ClipboardItem({ 'text/html': blob })];
       
-      const rtfTable = `\\trowd\\trgaph108\\trleft-108\\trbrdrt\\brdrs\\brdrw10\\brdrcf1\\trbrdrl\\brdrs\\brdrw10\\brdrcf1\\trbrdrb\\brdrs\\brdrw10\\brdrcf1\\trbrdrr\\brdrs\\brdrw10\\brdrcf1\\trbrdrh\\brdrs\\brdrw10\\brdrcf1\\trbrdrv\\brdrs\\brdrw10\\brdrcf1\\clbrdrt\\brdrs\\brdrw10\\brdrcf1\\clbrdrl\\brdrs\\brdrw10\\brdrcf1\\clbrdrb\\brdrs\\brdrw10\\brdrcf1\\clbrdrr\\brdrs\\brdrw10\\brdrcf1\\cellx4000\\clbrdrt\\brdrs\\brdrw10\\brdrcf1\\clbrdrl\\brdrs\\brdrw10\\brdrcf1\\clbrdrb\\brdrs\\brdrw10\\brdrcf1\\clbrdrr\\brdrs\\brdrw10\\brdrcf1\\cellx8000\\pard\\intbl\\b Metric\\b0\\cell\\b Count\\b0\\cell\\row\n`;
-
-      const rtfRows = [
-        ['New PBIs', stats.newPBIs.count.toString()],
-        ['PBIs with YakShaver Label', stats.yakShaverPBIs.count.toString()],
-        ['Completed PBIs', stats.completedPBIs.count.toString()]
-      ].map(row => `\\trowd\\trgaph108\\trleft-108\\trbrdrt\\brdrs\\brdrw10\\brdrcf1\\trbrdrl\\brdrs\\brdrw10\\brdrcf1\\trbrdrb\\brdrs\\brdrw10\\brdrcf1\\trbrdrr\\brdrs\\brdrw10\\brdrcf1\\trbrdrh\\brdrs\\brdrw10\\brdrcf1\\trbrdrv\\brdrs\\brdrw10\\brdrcf1\\clbrdrt\\brdrs\\brdrw10\\brdrcf1\\clbrdrl\\brdrs\\brdrw10\\brdrcf1\\clbrdrb\\brdrs\\brdrw10\\brdrcf1\\clbrdrr\\brdrs\\brdrw10\\brdrcf1\\cellx4000\\clbrdrt\\brdrs\\brdrw10\\brdrcf1\\clbrdrl\\brdrs\\brdrw10\\brdrcf1\\clbrdrb\\brdrs\\brdrw10\\brdrcf1\\clbrdrr\\brdrs\\brdrw10\\brdrcf1\\cellx8000\\pard\\intbl ${row[0]}\\cell ${row[1]}\\cell\\row\n`).join('');
-
-      const rtfFooter = '\\pard\\par\n}';
-      const rtfContent = rtfHeader + rtfTable + rtfRows + rtfFooter;
-
-      const blob = new Blob([rtfContent], { type: 'text/rtf' });
-      const data = [new ClipboardItem({ 'text/rtf': blob })];
-
       await navigator.clipboard.write(data);
     }
 
