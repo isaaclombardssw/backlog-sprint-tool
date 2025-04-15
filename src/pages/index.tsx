@@ -51,7 +51,6 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [repos, setRepos] = useState<Repository[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedRepo, setSelectedRepo] = useState<string>("");
   const [customRepo, setCustomRepo] = useState<string>("");
   const [isGenerating, setIsGenerating] = useState(false);
@@ -74,23 +73,7 @@ export default function Home() {
       setRepos(data);
     } catch (error) {
       console.error("Error fetching repositories:", error);
-    } finally {
-      setLoading(false);
     }
-  };
-
-  const handleRepoSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedRepo(event.target.value);
-    setCustomRepo(""); // Clear custom repo when selecting from dropdown
-    setStats(null); // Clear stats when changing repo
-    setError(null);
-  };
-
-  const handleCustomRepoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomRepo(event.target.value);
-    setSelectedRepo(""); // Clear selected repo when typing custom repo
-    setStats(null); // Clear stats when changing repo
-    setError(null);
   };
 
   const handleGenerate = async () => {
