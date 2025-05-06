@@ -178,7 +178,7 @@ export default function Home() {
     {
       key: '2',
       metric: 'PBIs with YakShaver Label',
-      count: stats.yakShaverPBIs.count,
+      count: `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(2)}%)`,
     },
     {
       key: '3',
