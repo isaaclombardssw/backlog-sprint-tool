@@ -103,7 +103,8 @@ export default function Home() {
       const rows = [
         ['New PBIs', stats.newPBIs.count.toString()],
         ['PBIs with YakShaver Label', `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`],
-        ['Completed PBIs', stats.completedPBIs.count.toString()]
+        ['Completed PBIs', stats.completedPBIs.count.toString()],
+        ['Net Change in PBIs', `${stats.newPBIs.count - stats.completedPBIs.count} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`]
       ];
 
       const content = [
@@ -135,6 +136,10 @@ export default function Home() {
             <tr>
               <td style="border: 1px solid #ddd; padding: 8px;">Completed PBIs</td>
               <td style="border: 1px solid #ddd; padding: 8px;">${stats.completedPBIs.count}</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">Net Change in PBIs</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">${`${stats.newPBIs.count - stats.completedPBIs.count} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`}</td>
             </tr>
           </tbody>
         </table>
@@ -185,6 +190,11 @@ export default function Home() {
       metric: 'Completed PBIs',
       count: stats.completedPBIs.count,
     },
+    {
+      key: '4',
+      metric: 'Net Change in PBIs',
+      count: `${stats.newPBIs.count - stats.completedPBIs.count} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`,
+    },
   ] : [];
 
   if (status === "loading") {
@@ -208,7 +218,7 @@ export default function Home() {
         </Button>
       </Header>
 
-      <Content style={{ padding: '24px' }}>
+      <Content style={{ padding: '24px', maxWidth: '80rem', margin: 'auto', width: '100%' }}>
         <Card title="Select a Repository">
           <Space direction="vertical" style={{ width: '100%' }} size="large">
             <Select
