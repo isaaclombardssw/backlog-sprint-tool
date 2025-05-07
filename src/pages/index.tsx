@@ -104,7 +104,7 @@ export default function Home() {
         ['New PBIs', stats.newPBIs.count.toString()],
         ['PBIs with YakShaver Label', `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`],
         ['Completed PBIs', stats.completedPBIs.count.toString()],
-        ['Net Change in PBIs', `${stats.newPBIs.count - stats.completedPBIs.count} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`]
+        ['Net Change in PBIs', `${stats.newPBIs.count > stats.completedPBIs.count ? '+' : ''} ${Math.abs(stats.newPBIs.count - stats.completedPBIs.count)} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`]
       ];
 
       const content = [
@@ -139,7 +139,7 @@ export default function Home() {
             </tr>
             <tr>
               <td style="border: 1px solid #ddd; padding: 8px;">Net Change in PBIs</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${`${stats.newPBIs.count - stats.completedPBIs.count} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`}</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">${`${stats.newPBIs.count > stats.completedPBIs.count ? '+' : ''} ${Math.abs(stats.newPBIs.count - stats.completedPBIs.count)} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`}</td>
             </tr>
           </tbody>
         </table>
@@ -303,7 +303,7 @@ export default function Home() {
             )}
           </Space>
         </Card>
-        <Card title="Notice">
+        <Card title="Notice" style={{ marginTop: '24px' }}>
           <p>
             This tool is a temporary (vibe coded) tool to help with the sprint planning process.
             We have plans to implement this in YakShaver soon.
