@@ -99,7 +99,7 @@ export default function Home() {
     if (!stats) return;
     
     if (format === 'markdown') {
-      const headers = ['Metric', 'Count'];
+      const headers = [`Metric (for ${selectedRepo || customRepo}) – last 30 days`, 'Count'];
       const rows = [
         ['New PBIs', stats.newPBIs.count.toString()],
         ['PBIs with YakShaver Label', `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`],
@@ -120,7 +120,7 @@ export default function Home() {
         <table style="border-collapse: collapse; width: 100%; font-family: Calibri, Arial, sans-serif;">
           <thead>
             <tr style="background-color: #f5f5f5;">
-              <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Metric</th>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">${`Metric (for ${selectedRepo || customRepo}) – last 30 days`}</th>
               <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Count</th>
             </tr>
           </thead>
@@ -163,7 +163,7 @@ export default function Home() {
 
   const statsColumns = [
     {
-      title: 'Metric',
+      title: `Metric (for ${selectedRepo || customRepo}) – last 30 days`,
       dataIndex: 'metric',
       key: 'metric',
     },
