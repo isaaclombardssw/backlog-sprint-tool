@@ -102,7 +102,7 @@ export default function Home() {
       const headers = ['Metric', 'Count'];
       const rows = [
         ['New PBIs', stats.newPBIs.count.toString()],
-        ['PBIs with YakShaver Label', `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(2)}%)`],
+        ['PBIs with YakShaver Label', `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`],
         ['Completed PBIs', stats.completedPBIs.count.toString()]
       ];
 
@@ -130,7 +130,7 @@ export default function Home() {
             </tr>
             <tr>
               <td style="border: 1px solid #ddd; padding: 8px;">PBIs with YakShaver Label</td>
-              <td style="border: 1px solid #ddd; padding: 8px;">${`${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(2)}%)`}</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">${`${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`}</td>
             </tr>
             <tr>
               <td style="border: 1px solid #ddd; padding: 8px;">Completed PBIs</td>
@@ -178,7 +178,7 @@ export default function Home() {
     {
       key: '2',
       metric: 'PBIs with YakShaver Label',
-      count: `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(2)}%)`,
+      count: `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`,
     },
     {
       key: '3',
