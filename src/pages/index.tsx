@@ -258,6 +258,7 @@ export default function Home() {
               loading={isGenerating}
               disabled={!selectedRepo && !customRepo}
               block
+              style={{maxWidth: '10rem'}}
             >
               Generate
             </Button>
