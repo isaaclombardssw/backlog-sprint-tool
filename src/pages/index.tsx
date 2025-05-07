@@ -303,6 +303,17 @@ export default function Home() {
             )}
           </Space>
         </Card>
+        <Card title="Notice">
+          <p>
+            This tool is a temporary (vibe coded) tool to help with the sprint planning process.
+            We have plans to implement this in YakShaver soon.
+            <br />
+            <br />
+            <a href="https://github.com/SSWConsulting/SSW.YakShaver/issues/2030">
+              See the issue for more details.
+            </a>
+          </p>
+        </Card>
       </Content>
     </Layout>
   );
