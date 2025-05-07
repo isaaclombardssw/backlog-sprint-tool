@@ -183,7 +183,7 @@ export default function Home() {
     {
       key: '2',
       metric: 'PBIs with YakShaver Label',
-      count: `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`,
+      count: stats.newPBIs.count == 0 ? '0%' : `${stats.yakShaverPBIs.count} (${((stats.yakShaverPBIs.count / stats.newPBIs.count) * 100).toFixed(0)}%)`,
     },
     {
       key: '3',
@@ -193,7 +193,7 @@ export default function Home() {
     {
       key: '4',
       metric: 'Net Change in PBIs',
-      count: `${stats.newPBIs.count > stats.completedPBIs.count ? '+' : '-'} ${Math.abs(stats.newPBIs.count - stats.completedPBIs.count)} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`,
+      count: stats.newPBIs.count == stats.completedPBIs.count ? 'No change' : `${stats.newPBIs.count > stats.completedPBIs.count ? '+' : '-'} ${Math.abs(stats.newPBIs.count - stats.completedPBIs.count)} ${stats.newPBIs.count > stats.completedPBIs.count ? '🔼' : '🔽'}`,
     },
   ] : [];
 
